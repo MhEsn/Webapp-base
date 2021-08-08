@@ -1,0 +1,36 @@
+.login-form-container {
+    display: flex;
+    flex-direction: row;
+    width: 1000px;
+    min-height: 600px;
+    border-radius: 6px;
+    background-color: #f2f2f2;
+    align-self: center;
+    margin-top: 75px;
+    margin-bottom: 75px;
+
+    .left-section {
+        width:650px;
+        min-height: 100%;
+        background-color: black;
+        border-radius: 6px 0px 0px 6px;
+    }
+    .right-section {
+        width: 350px;
+        min-height: 100%;
+        padding:10px;
+    }
+
+    .login-button{
+        width:300px;
+        height: 50px;
+        background-color: #7f1fda;
+        color: white;
+        border-radius: 4px;
+        font-size: 1em;
+        cursor: pointer;
+        margin-top: 10px;
+        border:none;
+        font-family: 'IRANSANS';
+    }
+}

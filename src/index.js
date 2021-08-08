@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+// import './assets/IRANSansWeb/ttf/IRANSansWeb_Medium.ttf';
 
 ReactDOM.render(
   <React.StrictMode>

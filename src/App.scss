@@ -1,0 +1,30 @@
+@import "./assets/styles/scss/signup.scss";
+@import "./assets/styles/scss/login.scss";
+
+.App {
+    display: flex;
+    flex-direction: column;
+    direction: rtl;
+    min-height: 100vh;
+}
+
+.font-face-gm {
+    font-family: "IRANSANS";
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.custom-input {
+    border: 1px solid #d9d9d9;
+    height: 35px;
+    width: 300px;
+    font-size: 1.1em;
+    margin: 10px 0px 10px 10px;
+    outline: none;
+    border-radius: 3px;
+    font-family: 'IRANSANS';
+}
