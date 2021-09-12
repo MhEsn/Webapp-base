@@ -1,11 +1,16 @@
+@import "./assets/styles/scss/home.scss";
 @import "./assets/styles/scss/signup.scss";
 @import "./assets/styles/scss/login.scss";
+@import "./assets/styles/scss/sidemenu.scss";
+@import "./assets/styles/scss/profile.scss";
 
 .App {
     display: flex;
     flex-direction: column;
     direction: rtl;
     min-height: 100vh;
+    padding:0px;
+    margin:0px;
 }
 
 .font-face-gm {

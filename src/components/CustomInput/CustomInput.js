@@ -5,7 +5,7 @@ function CustomInput(props) {
     return (
         <div className={props.containerClass}>
             <label>{props.title}</label>
-            <Input class={props.class} name={props.name} type={props.type} onChange={props.onChange} placeholder={props.placeholder} />
+            <Input value={props.value} class={props.class} name={props.name} type={props.type} onChange={props.onChange} placeholder={props.placeholder} required={props.required} disabled={props.disabled} />
         </div>
     )
 }

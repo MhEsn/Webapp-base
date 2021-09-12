@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import CustomInput from '../../components/CustomInput/CustomInput.js';
 import Button from '../../components/Button/Button.js';
 import userService from '../../services/userService.js';
 import Spinner from 'react-spinner-material';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from "react-router-dom";
 
 function Signup() {
 
@@ -17,7 +19,15 @@ function Signup() {
         , password: ""
         , confirmPassword: ""
     });
-    const [loading, setLoading] = useState(false)
+    // const [loading, setLoading] = useState(false);
+    const loading = useSelector((state) => state.LoadingReducer);
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem('token')))
+            window.location.href = `${window.location.origin}/home`;
+    }, []);
 
     function handleForm(event) {
         const { value, name } = event.target;
@@ -28,17 +38,33 @@ function Signup() {
     }
 
     function signup() {
-        setLoading(true);
+        // setLoading(true);
+        dispatch({
+            type: 'ACTIVE',
+            response: true
+        })
+        userModel.roleType = 2;//client
         return userService.signup(userModel).then((result) => {
-            setLoading(false);
-            return result;
+            localStorage.setItem('user', JSON.stringify(result.user))
+            localStorage.setItem('token', JSON.stringify(result.token))
+            return dispatch({
+                type: 'SIGN_UP_SUCCESS',
+                response: result
+            })
+        }).then(()=>{
+            return dispatch({
+                type: 'DEACTIVE',
+                response: false
+            })
+        }).then(()=>{
+            history.push("/home");
         }).catch((error) => { return error })
     }
 
     return (
         <div className="signup-container">
-            {loading ? <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20%' }}>
-                <Spinner size={120} spinnerColor={"#333"} spinnerWidth={2} visible={true} />
+            {loading.loadingState ? <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20%' }}>
+                <Spinner size={120} spinnerColor={"#333"} visible={true} />
             </div> :
                 <div className="signup-form-container">
                     <div className="right-section">
@@ -58,7 +84,7 @@ function Signup() {
                             <CustomInput title="تکرار رمز عبور" type="password" name="confirmPassword" class="custom-input" containerClass="custom-input-container" onChange={handleForm} />
                         </div>
                         <div className="row">
-                            <span>حساب کاربری دارید ؟ <a href="#">ورود</a></span>
+                            <span>حساب کاربری دارید ؟ <a href="/login">ورود</a></span>
                         </div>
                         <div className="row" style={{ marginTop: 10 }}>
                             <Button title="ساخت حساب" class="signup-button" onClick={signup} />

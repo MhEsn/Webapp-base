@@ -9,7 +9,10 @@ function Input(props) {
                 className={props.class}
                 placeholder={props.placeholder}
                 value={props.value}
-                onChange={props.onChange} />
+                onChange={props.onChange}
+                required={props.required}
+                disabled={props.disabled}
+                />
         </div>
     )
 }

@@ -13,14 +13,8 @@ function httpRequest(method, base, url, params) {
 		Accept: 'application/json',
 		'Content-Type': 'application/json'
 	};
-	const token = localStorage.authorizationData;
+	const token = JSON.parse(localStorage.getItem('token'));
 	if (token) {
-		if (new Date() >= new Date(token['.expires'])) {
-			localStorage.removeItem('authorizationData');
-			window.location.href = `${window.location.origin}/welcome`;
-			alert('اعتبار ورود شما به پایان رسیده است، مجددا وارد شوید');
-		}
-
 		headers.Authorization = `Bearer ${token}`;
 	}
 	return fetch(`${base}/${url}`, {
@@ -29,8 +23,18 @@ function httpRequest(method, base, url, params) {
 		body: JSON.stringify(params)
 	})
 		.then((response) => {
-			if (response.status === 201) {
-				return response.json()
+			debugger
+			if (response.status === 201 || response.status === 200) {
+				return response.json();
+			}
+			if(response.status === 204){
+				return response.text();
+			}
+			else if (response.status === 401) {
+				localStorage.removeItem('token');
+				localStorage.removeItem('user');
+				window.location.href = `${window.location.origin}/login`;
+				alert('اعتبار ورود شما به پایان رسیده است، مجددا وارد شوید');
 			}
 			else {
 				return Promise.reject(response.status)

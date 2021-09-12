@@ -1,9 +1,9 @@
 let enums = {};
 
-enums.DestinationType = {
-	'1': '',
-	'2': '',
-	'3': ''
+enums.roleType = {
+	'1': 'admin',
+	'2': 'normal_user',
+	'3': 'default'
 }
 
 export default enums;
